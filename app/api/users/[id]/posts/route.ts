@@ -6,8 +6,6 @@ interface ParamsProps {
 }
 
 export const GET = async (req: Request, { params }: ParamsProps) => {
-  console.log('herreeeeeeeeeeeeeeee');
-
   try {
     await connectToDB();
 

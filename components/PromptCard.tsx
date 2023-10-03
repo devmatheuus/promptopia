@@ -18,7 +18,9 @@ const PromptCard: React.FC<PromptCardProps> = ({
   const { data: session } = useSession();
   const [copied, setCopied] = useState('');
 
-  const handleCopy = () => {
+  const handleCopy = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+
     setCopied(prompt.prompt);
     navigator.clipboard.writeText(prompt.prompt);
 
@@ -26,7 +28,7 @@ const PromptCard: React.FC<PromptCardProps> = ({
   };
 
   const handleNavigation = () => {
-    if (session?.id === prompt.creator._id) {
+    if (session?.id === prompt.creator._id && pathName !== '/profile') {
       router.push(`/profile`);
       return;
     } else if (pathName === '/') {
@@ -58,7 +60,7 @@ const PromptCard: React.FC<PromptCardProps> = ({
           </div>
         </div>
 
-        <div className="copy_btn" role="button" onClick={handleCopy}>
+        <div className="copy_btn" role="button" onClick={(e) => handleCopy(e)}>
           <Image
             src={
               copied === prompt.prompt

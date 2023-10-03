@@ -3,7 +3,6 @@ import '@styles/globals.css';
 import ChildrenInterface from '@interfaces/Children';
 import Nav from '@components/Nav';
 import Provider from '@components/Provider';
-import { useSession } from 'next-auth/react';
 import { Session } from 'next-auth/';
 
 export const metadata = {
@@ -12,12 +11,10 @@ export const metadata = {
 };
 
 const RootLayout: React.FC<ChildrenInterface> = ({ children }) => {
-  const { data: session } = useSession();
-
   return (
     <html lang="en">
       <body>
-        <Provider session={session as Session}>
+        <Provider session={{ expires: '24' }}>
           <div className="main">
             <div className="gradient" />
           </div>
